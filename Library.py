@@ -11,6 +11,7 @@
 
 # Primero actualizamos pip en cmd: python -m pip install --upgrade pip --no-warn-script-location
 # Segundo instalamos el paquete postgress: pip install psycopg2
+# Para arreglar el problema en visual code: python -m pip install psycopg2-binary
 # O el de Mysql: pip install mysql-connector
 
 # -----------------------------------------------------------

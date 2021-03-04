@@ -18,6 +18,26 @@
 
 import psycopg2  # paquete para la conexcion
 
-psycopg2.connect(user="postgres",
+# Assignamos la conexion de la BBDD a una variable
+conexion_test_db = psycopg2.connect(user="postgres",
                  password="admin",
-                 host="127.0.0.1")
+                 host="127.0.0.1",
+                 port="5432",
+                 database="test_db")
+
+# Un cursor nos permite ejecutar sentencia en la bbdd
+cursor_test_db = conexion_test_db.cursor()
+
+# Asignamos sentencia SQL a una variable
+sql_select = "SELECT * FROM persona"
+
+# Ejecutar sentencia
+cursor_test_db.execute(sql_select)
+
+# fetchall devuelve el resultado 
+resultado = cursor_test_db.fetchall()
+print(resultado)
+
+# Cerrar conexion y cursor
+cursor_test_db.close()
+conexion_test_db.close()

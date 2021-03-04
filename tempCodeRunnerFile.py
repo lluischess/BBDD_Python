@@ -1,1 +1,1 @@
-import psycopg2
+pip install mysql-connector

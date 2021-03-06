@@ -30,7 +30,7 @@ conexion_test_db = psycopg2.connect(user="postgres",
 cursor_test_db = conexion_test_db.cursor()
 
 # Asignamos sentencia SQL a una variable
-sql_select = "SELECT * FROM persona"
+sql_select = "SELECT * FROM persona ORDER BY nombre"
 
 # Ejecutar sentencia
 cursor_test_db.execute(sql_select)

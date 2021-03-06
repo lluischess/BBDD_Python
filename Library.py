@@ -3,8 +3,10 @@
 
 """
 # 1. Instalar paquetes para trabajar con postgress y mysql
-# 2. Conexion a Postgress
-# 3. Conexion a Postgress con clase
+# 2. Conexion a Postgress y Select
+# 3. Insert
+# 4. Update
+# 5. Delete
 
 
 # -----------------------------------------------------------
@@ -16,7 +18,7 @@
 # O el de Mysql: pip install mysql-connector
 
 # -----------------------------------------------------------
-# 2. Conexion a Postgress
+# 2. Conexion a Postgress y Select
 
 import psycopg2  # paquete para la conexcion
 

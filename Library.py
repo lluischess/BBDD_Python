@@ -55,10 +55,37 @@ for resul in resultado:
 #print(resultado2)
 
 # Cerrar conexion y cursor
-cursor_test_db.close()
-conexion_test_db.close()
+#cursor_test_db.close()
+#conexion_test_db.close()
 
 #--------------------------------------------------------------------------------
-# 3. Conexion a Postgress con clase
+# 3. Insert
+
+sql_insert = "INSERT INTO persona(nombre, apellido, email) VALUES(%s, %s, %s)" # %s comodin
+
+valores = (
+    ("Marcos","mendez","lol3@lol.com"),
+    ("Maria","mendez","lol2@lol.com"),
+    ("Marta","mendez","lol1@lol.com")
+    ) #tupla
+
+#cursor_test_db.execute(sql_insert,valores) para insertar 1 registro
+
+# Para insertar varios registros a la vez
+cursor_test_db.executemany(sql_insert,valores)
+
+# Guardar informacion en la BBDD
+conexion_test_db.commit() # hasta que no se ejecute el commit no se guarda la información
+
+resultado = cursor_test_db.rowcount
+print(f"Registros insertados: {resultado}")
+
+# Cerrar conexion y cursors
+#cursor_test_db.close()
+#conexion_test_db.close()
+
+#--------------------------------------------------------------------------------
+# 4. Update
+
 
 

@@ -118,7 +118,7 @@ cursor_test_db.execute(sql_delete,valores)
 conexion_test_db.commit()
 resultado = cursor_test_db.rowcount
 print(f"Registros Eliminados: {resultado}")
-
+# Cerrar
 # Cerrar conexion y cursors
 cursor_test_db.close()
 conexion_test_db.close()

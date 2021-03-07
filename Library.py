@@ -132,7 +132,6 @@ valores = (input("Que id Eliminamos? "),)
 # 7. Transacciones con Roll Back
 
 try:
-
     sql_update = "UPDATE persona SET nombre = %s, apellido = %s, email = %s WHERE id_persona = %s"
     valores = ("Juan", "Perezqqqqqqqqq", "jperez@gmail.com",
                input("Que id modificamos?"))

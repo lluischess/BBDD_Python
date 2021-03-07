@@ -89,13 +89,36 @@ valores = (
 
 sql_update = "UPDATE persona SET nombre = %s, apellido = %s, email = %s WHERE id_persona = %s"
 
-donde = input("Que id modificamos? ")
-valores = ("Juan","Perez","jperez@gmail.com",donde)
+#donde = input("Que id modificamos? ")
 
-cursor_test_db.execute(sql_update,valores)
+#valores = (
+#    ("Juan","Perez","jperez@gmail.com",input("Que id modificamos? ")),
+#    ("Juan2","Perez","jperez@gmail.com",input("Que id modificamos? ")),
+#    ("Juan3","Perez","jperez@gmail.com",input("Que id modificamos? "))
+#    )
+
+#cursor_test_db.execute(sql_update,valores)
+#cursor_test_db.executemany(sql_update,valores)
+#conexion_test_db.commit()
+#resultado = cursor_test_db.rowcount
+#print(f"Registros actualizados: {resultado}")
+# Cerrar conexion y cursors
+#cursor_test_db.close()
+#conexion_test_db.close()
+
+#--------------------------------------------------------------------------------
+# 5. Delete
+
+sql_delete = "DELETE FROM persona WHERE id_persona = %s" 
+
+valores = (input("Que id Eliminamos? "),)
+
+cursor_test_db.execute(sql_delete,valores)
+#cursor_test_db.executemany(sql_update,valores)
 conexion_test_db.commit()
 resultado = cursor_test_db.rowcount
-print(f"Registros actualizados: {resultado}")
+print(f"Registros Eliminados: {resultado}")
+
 # Cerrar conexion y cursors
 cursor_test_db.close()
 conexion_test_db.close()

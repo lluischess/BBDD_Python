@@ -26,92 +26,94 @@ import psycopg2  # paquete para la conexcion
 
 # Assignamos la conexion de la BBDD a una variable
 conexion_test_db = psycopg2.connect(user="postgres",
-                 password="admin",
-                 host="127.0.0.1",
-                 port="5432",
-                 database="test_db")
+                                    password="admin",
+                                    host="127.0.0.1",
+                                    port="5432",
+                                    database="test_db")
 
 # Un cursor nos permite ejecutar sentencia en la bbdd
 cursor_test_db = conexion_test_db.cursor()
 
 # Asignamos sentencia SQL a una variable
-#sql_select = "SELECT * FROM persona WHERE id_persona = %s" 1 valor
-sql_select = "SELECT * FROM persona WHERE id_persona IN %s" # varios valores
+# sql_select = "SELECT * FROM persona WHERE id_persona = %s" 1 valor
+sql_select = "SELECT * FROM persona WHERE id_persona IN %s"  # varios valores
 
 entrada = input("Proporciona las Ids: (separado por comas)")
 tupla = tuple(entrada.split(","))
 #id_persona = input("Añade el Id de la persona:")
-tupla_ids = ((tupla),) #tupla de tuplas
-#llave_primeria = (id_persona,)#tuppla
+tupla_ids = ((tupla),)  # tupla de tuplas
+# llave_primeria = (id_persona,)#tuppla
 
 # Ejecutar sentenc1ia
-cursor_test_db.execute(sql_select,tupla_ids) # segundo parametro de sustitución de la id_persona
+# segundo parametro de sustitución de la id_persona
+cursor_test_db.execute(sql_select, tupla_ids)
 
-# fetchall devuelve el resultado 
-resultado = cursor_test_db.fetchall() #devuelve todos los registros
+# fetchall devuelve el resultado
+resultado = cursor_test_db.fetchall()  # devuelve todos los registros
 for resul in resultado:
     print(resul)
 
 # fetchone devuelve 1 registro
 #resultado2 = cursor_test_db.fetchone()
-#print(resultado2)
+# print(resultado2)
 
 # Cerrar conexion y cursor
-#cursor_test_db.close()
-#conexion_test_db.close()
+# cursor_test_db.close()
+# conexion_test_db.close()
 
-#--------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------
 # 3. Insert
 
-sql_insert = "INSERT INTO persona(nombre, apellido, email) VALUES(%s, %s, %s)" # %s comodin
+# %s comodin
+sql_insert = "INSERT INTO persona(nombre, apellido, email) VALUES(%s, %s, %s)"
 
 valores = (
-    ("Marcos","mendez","lol3@lol.com"),
-    ("Maria","mendez","lol2@lol.com"),
-    ("Marta","mendez","lol1@lol.com")
-    ) #tupla
+    ("Marcos", "mendez", "lol3@lol.com"),
+    ("Maria", "mendez", "lol2@lol.com"),
+    ("Marta", "mendez", "lol1@lol.com")
+)  # tupla
 
-#cursor_test_db.execute(sql_insert,valores) para insertar 1 registro
+# cursor_test_db.execute(sql_insert,valores) para insertar 1 registro
 
 # Para insertar varios registros a la vez
-#cursor_test_db.executemany(sql_insert,valores)
+# cursor_test_db.executemany(sql_insert,valores)
 
 # Guardar informacion en la BBDD
-#conexion_test_db.commit() # hasta que no se ejecute el commit no se guarda la información
+# conexion_test_db.commit() # hasta que no se ejecute el commit no se guarda la información
 
 #resultado = cursor_test_db.rowcount
 #print(f"Registros insertados: {resultado}")
 
 # Cerrar conexion y cursors
-#cursor_test_db.close()
-#conexion_test_db.close()
+# cursor_test_db.close()
+# conexion_test_db.close()
 
-#--------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------
 # 4. Update
 
 sql_update = "UPDATE persona SET nombre = %s, apellido = %s, email = %s WHERE id_persona = %s"
 
 #donde = input("Que id modificamos? ")
 
-#valores = (
+# valores = (
 #    ("Juan","Perez","jperez@gmail.com",input("Que id modificamos? ")),
 #    ("Juan2","Perez","jperez@gmail.com",input("Que id modificamos? ")),
 #    ("Juan3","Perez","jperez@gmail.com",input("Que id modificamos? "))
 #    )
 
-#cursor_test_db.execute(sql_update,valores)
-#cursor_test_db.executemany(sql_update,valores)
-#conexion_test_db.commit()
+# cursor_test_db.execute(sql_update,valores)
+# cursor_test_db.executemany(sql_update,valores)
+# conexion_test_db.commit()
 #resultado = cursor_test_db.rowcount
 #print(f"Registros actualizados: {resultado}")
 # Cerrar conexion y cursors
-#cursor_test_db.close()
-#conexion_test_db.close()
+# cursor_test_db.close()
+# conexion_test_db.close()
 
-#--------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------
 # 5. Delete
 
-sql_delete = "DELETE FROM persona WHERE id_persona = %s" 
+sql_delete = "DELETE FROM persona WHERE id_persona = %s"
 
 valores = (input("Que id Eliminamos? "),)
 
@@ -121,25 +123,26 @@ valores = (input("Que id Eliminamos? "),)
 # resultado = cursor_test_db.rowcount
 # print(f"Registros Eliminados: {resultado}")
 
-#--------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------
 # 6. Omitir commit
 # Lo habitual es tenerlo en false
 #conexion_test_db.autocommit = True
 
-#--------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------
 # 7. Transacciones con Roll Back
 
 try:
-    
+
     sql_update = "UPDATE persona SET nombre = %s, apellido = %s, email = %s WHERE id_persona = %s"
-    valores = ("Juan","Perezqqqqqqqqq","jperez@gmail.com",input("Que id modificamos?"))
-    cursor_test_db.execute(sql_update,valores)
+    valores = ("Juan", "Perezqqqqqqqqq", "jperez@gmail.com",
+               input("Que id modificamos?"))
+    cursor_test_db.execute(sql_update, valores)
     conexion_test_db.commit()
-    
+
 except:
     conexion_test_db.rollback()
     print(f"Error al hacer la transacción {e}")
-    
+
 # Cerrar conexion y cursors
 cursor_test_db.close()
 conexion_test_db.close()

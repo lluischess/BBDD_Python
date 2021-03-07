@@ -72,13 +72,13 @@ valores = (
 #cursor_test_db.execute(sql_insert,valores) para insertar 1 registro
 
 # Para insertar varios registros a la vez
-cursor_test_db.executemany(sql_insert,valores)
+#cursor_test_db.executemany(sql_insert,valores)
 
 # Guardar informacion en la BBDD
-conexion_test_db.commit() # hasta que no se ejecute el commit no se guarda la información
+#conexion_test_db.commit() # hasta que no se ejecute el commit no se guarda la información
 
-resultado = cursor_test_db.rowcount
-print(f"Registros insertados: {resultado}")
+#resultado = cursor_test_db.rowcount
+#print(f"Registros insertados: {resultado}")
 
 # Cerrar conexion y cursors
 #cursor_test_db.close()
@@ -87,5 +87,15 @@ print(f"Registros insertados: {resultado}")
 #--------------------------------------------------------------------------------
 # 4. Update
 
+sql_update = "UPDATE persona SET nombre = %s, apellido = %s, email = %s WHERE id_persona = %s"
 
+donde = input("Que id modificamos? ")
+valores = ("Juan","Perez","jperez@gmail.com",donde)
 
+cursor_test_db.execute(sql_update,valores)
+conexion_test_db.commit()
+resultado = cursor_test_db.rowcount
+print(f"Registros actualizados: {resultado}")
+# Cerrar conexion y cursors
+cursor_test_db.close()
+conexion_test_db.close()

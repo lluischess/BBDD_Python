@@ -7,6 +7,8 @@
 # 3. Insert
 # 4. Update
 # 5. Delete
+# 6. Omitir commit
+# 7. Transacciones con Roll Back
 
 
 # -----------------------------------------------------------
@@ -113,12 +115,31 @@ sql_delete = "DELETE FROM persona WHERE id_persona = %s"
 
 valores = (input("Que id Eliminamos? "),)
 
-cursor_test_db.execute(sql_delete,valores)
-#cursor_test_db.executemany(sql_update,valores)
-conexion_test_db.commit()
-resultado = cursor_test_db.rowcount
-print(f"Registros Eliminados: {resultado}")
-# Cerrar
+# cursor_test_db.execute(sql_delete,valores)
+# #cursor_test_db.executemany(sql_update,valores)
+# conexion_test_db.commit()
+# resultado = cursor_test_db.rowcount
+# print(f"Registros Eliminados: {resultado}")
+
+#--------------------------------------------------------------------------------
+# 6. Omitir commit
+# Lo habitual es tenerlo en false
+#conexion_test_db.autocommit = True
+
+#--------------------------------------------------------------------------------
+# 7. Transacciones con Roll Back
+
+try:
+    
+    sql_update = "UPDATE persona SET nombre = %s, apellido = %s, email = %s WHERE id_persona = %s"
+    valores = ("Juan","Perezqqqqqqqqq","jperez@gmail.com",input("Que id modificamos?"))
+    cursor_test_db.execute(sql_update,valores)
+    conexion_test_db.commit()
+    
+except:
+    conexion_test_db.rollback()
+    print(f"Error al hacer la transacción {e}")
+    
 # Cerrar conexion y cursors
 cursor_test_db.close()
 conexion_test_db.close()

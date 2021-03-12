@@ -9,6 +9,7 @@
 # 5. Delete
 # 6. Omitir commit
 # 7. Transacciones con Roll Back
+# 8. Pull de Conexiones a la Base de datos
 
 
 # -----------------------------------------------------------
@@ -145,3 +146,16 @@ except:
 # Cerrar conexion y cursors
 cursor_test_db.close()
 conexion_test_db.close()
+
+#-----------------------------------------------------------------------------------
+# 8. Pull de Conexiones a la Base de datos
+
+# Explicación: Un pull de conexiones se utiliza para administrar un maximo de conexiones simultaneas
+#              a la Base de datos y soportando varios clientes y cada cliente pudiendo usar varias conexiones
+#              a la base de datos misma.
+
+# Utilizar un conjunto de conexiones con Psycopg2
+
+
+
+
